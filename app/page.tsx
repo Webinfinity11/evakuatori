@@ -2,12 +2,8 @@ import Image from "next/image";
 import GeorgiaMap from "@/components/GeorgiaMap";
 import SiteHeader from "@/components/SiteHeader";
 import Reveal from "@/components/Reveal";
-import CountUp from "@/components/CountUp";
 import Marquee from "@/components/Marquee";
-import {
-  Phone, Clock3, ShieldCheck, Wallet, Fuel, BatteryCharging,
-  KeyRound, Disc3, ArrowUpRight, ChevronDown, Check, MapPin,
-} from "lucide-react";
+import { Phone, Clock3, ShieldCheck, Wallet, ArrowUpRight, ChevronDown, Check, MapPin } from "lucide-react";
 
 const TEL = "568120120";
 const TEL_DISPLAY = "568 120 120";
@@ -19,32 +15,47 @@ const SERVICES = [
   { title: "ავარიული ევაკუაცია", text: "დაზიანებული ავტომობილის ამოყვანა და გადაყვანა.", img: "/img/service-crash.jpg" },
 ];
 
-const HELP = [
-  { icon: Disc3, title: "საბურავის შეცვლა", text: "მოგიტანთ და შეგიცვლით ადგილზე." },
-  { icon: Fuel, title: "საწვავის მიწოდება", text: "ბენზინი ან დიზელი, 10 ლიტრიდან." },
-  { icon: BatteryCharging, title: "დაქოქვა", text: "დამჯდარ აკუმულატორს ადგილზევე დაგიქოქავთ." },
-  { icon: KeyRound, title: "კარის გაღება", text: "გასაღები შიგნით დაგრჩათ? გაგიღებთ." },
-];
-
-const HERO_STATS = [
-  { n: "24/7", label: "ყოველდღე, უქმეების გარეშე" },
-  { n: "30 წთ", label: "მისვლა თბილისში" },
-  { n: "50 ₾-დან", label: "გამჭვირვალე ფასი" },
-];
-
-const TARIFFS = [
-  { name: "თბილისში", price: "50", unit: "₾-დან", points: ["მისვლა 30 წუთში", "ჩატვირთვა და დამაგრება", "ღამის დანამატის გარეშე"] },
-  { name: "ობობა ევაკუატორი", price: "80", unit: "₾-დან", featured: true, points: ["ეზო, პარკინგი, ვიწრო ქუჩა", "ბლოკირებული ბორბლებით", "მინუს პირველი სართული"] },
-  { name: "რეგიონები", price: "1.5", unit: "₾ / კმ", points: ["ბათუმი, ქუთაისი, გორი", "დაბრუნების გადასახადის გარეშე", "საზღვრამდე მიყვანა"] },
+const PRICING = [
+  {
+    name: "თბილისში",
+    text: "ქალაქის შიგნით გადაყვანა — მისამართიდან მისამართამდე.",
+  },
+  {
+    name: "ობობა ევაკუატორი",
+    featured: true,
+    text: "ეზო, პარკინგი, ვიწრო ქუჩა — იქ, სადაც ბრტყელი ვერ შედის.",
+  },
+  {
+    name: "რეგიონები",
+    text: "თბილისიდან რეგიონში, ან რეგიონიდან თბილისში.",
+  },
 ];
 
 const FAQ = [
-  { q: "რა ღირს ევაკუატორის გამოძახება?", a: "თბილისში 50 ლარიდან, ობობა ევაკუატორი 80 ლარიდან, რეგიონებში 1.5 ლარი კილომეტრზე. ზუსტ ფასს ზარის დროსვე გეტყვით." },
-  { q: "რამდენ ხანში მოხვალთ?", a: "თბილისში საშუალოდ 30 წუთში. ღამით და უქმეებზე იგივე დროა." },
-  { q: "მუშაობთ ღამით?", a: "დიახ, 24 საათი, კვირაში 7 დღე. ღამის ან უქმე დღის დანამატი არ გვაქვს." },
-  { q: "დაზიანებული ავტომობილი გადაგყავთ?", a: "დიახ. ჯალამბრით ამოვიყვანთ და უსაფრთხოდ ჩავტვირთავთ." },
-  { q: "მოტოციკლს გადაიყვანთ?", a: "დიახ, სპეციალური სამაგრი ღვედებით." },
-  { q: "როგორ გადავიხადო?", a: "ნაღდით ან გადარიცხვით. იურიდიულ პირებს ვუწერთ ინვოისს." },
+  {
+    q: "რა ღირს ევაკუატორის გამოძახება?",
+    a: "ფასი დამოკიდებულია მანძილზე, ავტომობილის ტიპსა და იმაზე, რამდენად რთულია მასთან მისვლა. დაგვირეკეთ, აღწერეთ სიტუაცია და ზუსტ თანხას ტელეფონშივე გეტყვით.",
+  },
+  {
+    q: "რამდენ ხანში მოხვალთ?",
+    a: "დრო იმაზეა დამოკიდებული, სად დგას ავტომობილი. ზარის დროს გეტყვით, რამდენ ხანში მოვა უახლოესი ევაკუატორი.",
+  },
+  {
+    q: "სად ემსახურებით?",
+    a: "თბილისსა და საქართველოს რეგიონებში. მიმართულება ზარის დროს დაზუსტდება.",
+  },
+  {
+    q: "დაზიანებული ავტომობილი გადაგყავთ?",
+    a: "დიახ. დაგვირეკეთ და აღწერეთ ავტომობილის მდგომარეობა — შესაბამის ევაკუატორს გამოგიგზავნით.",
+  },
+  {
+    q: "როგორი ევაკუატორი მჭირდება?",
+    a: "ეს ავტომობილის ტიპსა და დგომის ადგილზეა დამოკიდებული. თქვენ არ გჭირდებათ ამის გადაწყვეტა — აღწერეთ სიტუაცია და ჩვენ შევარჩევთ.",
+  },
+  {
+    q: "როგორ ხდება ანგარიშსწორება?",
+    a: "გადახდის პირობებს ტელეფონში შეგითანხმებთ.",
+  },
 ];
 
 function CallButton({ big = false, className = "" }: { big?: boolean; className?: string }) {
@@ -83,15 +94,14 @@ export default function Home() {
 
           <div className="relative mx-auto max-w-7xl px-5 pt-16 text-center sm:pt-24 lg:px-8">
             <h1 className="headline tt mx-auto max-w-4xl text-[40px] font-black sm:text-6xl lg:text-[68px]">
-              <span className="enter block" style={{ animationDelay: "60ms" }}>ევაკუატორი თბილისში</span>
-              <span className="enter block text-brand" style={{ animationDelay: "140ms" }}>მოვა 30 წუთში</span>
+              <span className="enter block" style={{ animationDelay: "60ms" }}>ევაკუატორის გამოძახება</span>
+              <span className="enter block text-brand" style={{ animationDelay: "140ms" }}>ერთი ზარით</span>
             </h1>
 
             <p className="enter mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink/60 sm:text-lg" style={{ animationDelay: "230ms" }}>
-              გამოიძახეთ ევაკუატორი ნებისმიერ დროს — 24 საათი, კვირაში 7 დღე,
-              თბილისსა და მთელ საქართველოში. მუშაობს უქმეებზეც. ზუსტ ფასს
-              ტელეფონშივე გეტყვით და ადგილზე აღარ შეიცვლება. მომსახურება
-              50 ლარიდან.
+              დაგვირეკეთ და აღწერეთ სიტუაცია — ავტომობილის უსაფრთხო გადაყვანა
+              თბილისსა და საქართველოს რეგიონებში. შესაფერის ევაკუატორს ჩვენ
+              შევარჩევთ, ფასსა და დროს კი ტელეფონშივე შეგითანხმებთ.
             </p>
 
             <div className="enter mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ animationDelay: "320ms" }}>
@@ -104,15 +114,6 @@ export default function Home() {
                 <ChevronDown className="size-4 text-ink/40 transition group-hover:translate-y-0.5" />
               </a>
             </div>
-
-            <dl className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-4">
-              {HERO_STATS.map((s, i) => (
-                <div key={s.n} className="enter" style={{ animationDelay: `${400 + i * 70}ms` }}>
-                  <dt className="text-xl font-black sm:text-2xl">{s.n}</dt>
-                  <dd className="mt-1 text-[11px] leading-snug text-ink/50 sm:text-[13px]">{s.label}</dd>
-                </div>
-              ))}
-            </dl>
 
             {/* ევაკუატორი — რეფერენსის პროპორციაზე, ჩრდილითა და დეკორით */}
             <div className="relative mx-auto mt-10 max-w-3xl sm:mt-12">
@@ -158,10 +159,10 @@ export default function Home() {
           <div className="relative mt-6 border-t border-ink/5 bg-cream-deep/60">
             <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-ink/5 px-5 lg:grid-cols-4 lg:px-8">
               {[
-                { icon: Clock3, t: "მისვლა 30 წუთში" },
-                { icon: Wallet, t: "ფიქსირებული ფასი" },
-                { icon: ShieldCheck, t: "დაზღვეული გადაყვანა" },
-                { icon: Phone, t: "ოპერატორი 24 საათი" },
+                { icon: Clock3, t: "გამოძახება 24 საათი" },
+                { icon: Wallet, t: "ფასი ზარის დროს" },
+                { icon: ShieldCheck, t: "უსაფრთხო გადაყვანა" },
+                { icon: MapPin, t: "თბილისი და რეგიონები" },
               ].map(({ icon: I, t }, i) => (
                 <Reveal key={t} delay={i * 90} className="flex items-center justify-center gap-2.5 px-3 py-5">
                   <I className="size-5 shrink-0 text-brand" strokeWidth={2} />
@@ -191,19 +192,19 @@ export default function Home() {
               <div className="p-8 sm:p-12 lg:p-14">
                 <Eyebrow>ჩვენ შესახებ</Eyebrow>
                 <h2 className="headline tt text-3xl font-black sm:text-4xl">
-                  ავტოპარკი ჩვენია,<br />
-                  <span className="text-brand-soft">შუამავლების გარეშე</span>
+                  ავტომობილს<br />
+                  <span className="text-brand-soft">უსაფრთხოდ გადავიყვანთ</span>
                 </h2>
                 <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
-                  ზარს არავის გადავცემთ. 21 ევაკუატორი და საკუთარი გუნდი —
-                  ამიტომ ვიცით ზუსტად, როდის მოვა მანქანა და რამდენი დაჯდება.
+                  გამოძახება მარტივია: დაგვირეკავთ, ამბობთ სად დგას ავტომობილი
+                  და სად გჭირდებათ გადაყვანა. დანარჩენს ჩვენ მოვაგვარებთ.
                 </p>
 
                 <ul className="mt-7 space-y-3">
                   {[
-                    "ფასს ტელეფონში ვასახელებთ და აღარ ვცვლით",
-                    "ავტომობილი დაზღვეულია გადაყვანისას",
-                    "ღამით და უქმეებზე დანამატი არ გვაქვს",
+                    "ზარზე ცოცხალი ოპერატორი გპასუხობთ",
+                    "ავტომობილის ტიპს შესაფერის ევაკუატორს შევურჩევთ",
+                    "პირობებს წინასწარ, ტელეფონში შევათანხმებთ",
                   ].map((t, i) => (
                     <Reveal as="li" key={t} delay={120 + i * 100} className="flex gap-3 text-sm text-white/80">
                       <Check className="mt-0.5 size-4 shrink-0 text-brand-soft" strokeWidth={3} />
@@ -259,51 +260,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ------------------------------ დახმარება გზაზე ------------------------------ */}
-        <section id="help" className="scroll-mt-24 bg-cream px-5 py-16 sm:py-24 lg:px-8">
-          <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
-            <div>
-              <Reveal>
-                <Eyebrow>დახმარება გზაზე</Eyebrow>
-                <h2 className="headline tt text-3xl font-black sm:text-4xl">
-                  ევაკუატორი ყოველთვის<br />საჭირო არ არის
-                </h2>
-                <p className="mt-4 max-w-md text-[15px] text-ink/60">
-                  ხშირად პრობლემა ადგილზევე გვარდება და გაცილებით იაფად დაგიჯდებათ.
-                </p>
-              </Reveal>
-
-              <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-                {HELP.map(({ icon: I, title, text }, i) => (
-                  <Reveal as="li" key={title} delay={100 + i * 110} className="hover-lift group rounded-3xl bg-white p-5 shadow-sm hover:shadow-lg hover:shadow-ink/5">
-                    <I className="size-6 text-brand transition duration-300 group-hover:scale-110" strokeWidth={2} />
-                    <h3 className="mt-4 text-[15px] font-extrabold">{title}</h3>
-                    <p className="mt-1 text-sm text-ink/55">{text}</p>
-                  </Reveal>
-                ))}
-              </ul>
-            </div>
-
-            <Reveal delay={150} className="relative">
-              <div className="group relative aspect-4/5 overflow-hidden rounded-4xl sm:rounded-5xl">
-                <Image
-                  src="/img/call.jpg"
-                  alt="მძღოლები ევაკუატორს ელოდებიან"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition duration-[1.2s] group-hover:scale-105"
-                />
-              </div>
-              <div className="absolute -bottom-6 left-6 right-6 rounded-3xl bg-white p-6 shadow-2xl shadow-ink/10 sm:left-auto sm:right-8 sm:w-[280px]">
-                <p className="text-xs font-bold uppercase tracking-widest text-brand">დარეკეთ ახლავე</p>
-                <a href={HREF} className="mt-1.5 block text-2xl font-black tracking-tight transition hover:text-brand">
-                  {TEL_DISPLAY}
-                </a>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
         {/* --------------------------------- დაფარვა --------------------------------- */}
         <section id="coverage" className="scroll-mt-24 bg-white px-5 py-16 pt-24 sm:py-24 lg:px-8">
           <div className="mx-auto max-w-7xl">
@@ -321,20 +277,6 @@ export default function Home() {
               <GeorgiaMap />
             </div>
 
-            <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-6 border-t border-ink/10 pt-8 text-center sm:grid-cols-3">
-              {[
-                { to: 21, suffix: "", t: "ევაკუატორი მორიგეობაში" },
-                { to: 8, suffix: " სთ", t: "ყველაზე შორეულ წერტილამდე" },
-                { to: 0, suffix: " ₾", t: "დაბრუნების გადასახადი" },
-              ].map((x, i) => (
-                <Reveal key={x.t} delay={i * 110}>
-                  <p className="text-3xl font-black">
-                    <CountUp to={x.to} suffix={x.suffix} />
-                  </p>
-                  <p className="mt-1 text-[13px] text-ink/50">{x.t}</p>
-                </Reveal>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -342,61 +284,47 @@ export default function Home() {
         <section id="prices" className="scroll-mt-24 bg-cream px-5 py-16 sm:py-24 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <Reveal className="mx-auto max-w-xl text-center">
-              <Eyebrow>ტარიფები</Eyebrow>
+              <Eyebrow>ფასი</Eyebrow>
               <h2 className="headline tt text-3xl font-black sm:text-5xl">
-                ფასი, რომელიც <span className="text-brand">არ იცვლება</span>
+                ფასს <span className="text-brand">ზარის დროს</span> შეგითანხმებთ
               </h2>
               <p className="mt-4 text-[15px] text-ink/55">
-                საწყისი ფასებია. ზუსტ თანხას ზარისთანავე გეტყვით.
+                თანხა დამოკიდებულია მანძილზე, ავტომობილის ტიპსა და მისვლის
+                სირთულეზე. დაგვირეკეთ — ზუსტ ფასს ადგილზე მისვლამდე გეტყვით.
               </p>
             </Reveal>
 
             <div className="mt-12 grid gap-5 lg:grid-cols-3">
-              {TARIFFS.map((t, i) => (
+              {PRICING.map((t, i) => (
                 <Reveal
                   as="article"
                   key={t.name}
                   delay={i * 130}
                   className={`hover-lift relative flex flex-col rounded-4xl p-8 ${
-                    t.featured ? "bg-ink text-white shadow-2xl shadow-ink/20 lg:-my-3 lg:py-11" : "border border-ink/10 bg-white hover:shadow-lg hover:shadow-ink/5"
+                    t.featured
+                      ? "bg-ink text-white shadow-2xl shadow-ink/20 lg:-my-3 lg:py-11"
+                      : "border border-ink/10 bg-white hover:shadow-lg hover:shadow-ink/5"
                   }`}
                 >
-                  {t.featured && (
-                    <span className="absolute right-8 top-8 rounded-full bg-brand px-3 py-1 text-[11px] font-bold">
-                      ყველაზე ხშირი
-                    </span>
-                  )}
-                  <h3 className="text-lg font-extrabold">{t.name}</h3>
-                  <p className="mt-5 flex items-baseline gap-1.5">
-                    <span className="headline text-5xl font-black">{t.price}</span>
-                    <span className={`text-sm font-bold ${t.featured ? "text-white/50" : "text-ink/45"}`}>{t.unit}</span>
+                  <h3 className="text-xl font-extrabold">{t.name}</h3>
+                  <p className={`mt-4 flex-1 text-sm leading-relaxed ${t.featured ? "text-white/60" : "text-ink/55"}`}>
+                    {t.text}
                   </p>
-
-                  <ul className={`mt-7 space-y-3 border-t pt-7 text-sm ${t.featured ? "border-white/10" : "border-ink/10"}`}>
-                    {t.points.map((p) => (
-                      <li key={p} className="flex gap-2.5">
-                        <Check className={`mt-0.5 size-4 shrink-0 ${t.featured ? "text-brand-soft" : "text-brand"}`} strokeWidth={3} />
-                        <span className={t.featured ? "text-white/70" : "text-ink/65"}>{p}</span>
-                      </li>
-                    ))}
-                  </ul>
 
                   <a
                     href={HREF}
                     className={`group tt mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-extrabold transition duration-300 ${
-                      t.featured ? "bg-brand text-white hover:bg-[#d95614]" : "border border-ink/15 hover:border-brand hover:text-brand"
+                      t.featured
+                        ? "bg-brand text-white hover:bg-[#d95614]"
+                        : "border border-ink/15 hover:border-brand hover:text-brand"
                     }`}
                   >
                     <Phone className="size-4 transition group-hover:rotate-[18deg]" strokeWidth={2.4} />
-                    ზუსტი ფასი
+                    ფასის გაგება
                   </a>
                 </Reveal>
               ))}
             </div>
-
-            <p className="mt-8 text-center text-xs text-ink/45">
-              ფასები მსუბუქი ავტომობილისთვის. ჯიპი და მიკროავტობუსი — ინდივიდუალურად.
-            </p>
           </div>
         </section>
 
@@ -456,7 +384,7 @@ export default function Home() {
       {/* ---------------------------------- ფუტერი ---------------------------------- */}
       <footer className="bg-ink px-5 pt-16 text-white lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <div className="flex items-center gap-2.5">
                 <Image src="/img/logo.png" alt="ევაკუატორი" width={44} height={44} className="size-11" />
@@ -473,17 +401,8 @@ export default function Home() {
             <div>
               <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">სერვისები</h3>
               <ul className="mt-4 space-y-2.5 text-sm text-white/60">
-                {["სტანდარტული ევაკუატორი", "ობობა ევაკუატორი", "ავარიული ევაკუაცია", "მოტოციკლის გადაყვანა"].map((t) => (
+                {["სტანდარტული ევაკუატორი", "ობობა ევაკუატორი", "ავარიული ევაკუაცია"].map((t) => (
                   <li key={t}><a href="#services" className="transition hover:text-white">{t}</a></li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">დახმარება გზაზე</h3>
-              <ul className="mt-4 space-y-2.5 text-sm text-white/60">
-                {["საბურავის შეცვლა", "საწვავის მიწოდება", "დაქოქვა ადგილზე", "კარის გაღება"].map((t) => (
-                  <li key={t}><a href="#help" className="transition hover:text-white">{t}</a></li>
                 ))}
               </ul>
             </div>

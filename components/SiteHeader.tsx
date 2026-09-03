@@ -6,9 +6,9 @@ import { Phone } from "lucide-react";
 
 const NAV = [
   { href: "#services", label: "სერვისები" },
-  { href: "#help", label: "დახმარება გზაზე" },
   { href: "#coverage", label: "დაფარვა" },
-  { href: "#prices", label: "ფასები" },
+  { href: "#prices", label: "ფასი" },
+  { href: "#faq", label: "კითხვები" },
 ];
 
 export default function SiteHeader({ tel, telDisplay }: { tel: string; telDisplay: string }) {
