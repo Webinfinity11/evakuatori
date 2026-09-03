@@ -10,9 +10,9 @@ const TEL_DISPLAY = "568 120 120";
 const HREF = `tel:+995${TEL}`;
 
 const SERVICES = [
-  { title: "სტანდარტული ევაკუატორი", text: "ბრტყელძარიანი, მსუბუქი ავტომობილისთვის.", img: "/img/service-standard.jpg" },
-  { title: "ობობა ევაკუატორი", text: "ეზოში, პარკინგსა და ვიწრო ქუჩაში.", img: "/img/service-oboba.jpg" },
-  { title: "ავარიული ევაკუაცია", text: "დაზიანებული ავტომობილის ამოყვანა და გადაყვანა.", img: "/img/service-crash.jpg" },
+  { title: "სტანდარტული ევაკუატორი", text: "ბრტყელძარიანი, მსუბუქი ავტომობილისთვის.", img: "/img/service-standard-2.jpg" },
+  { title: "ობობა ევაკუატორი", text: "ეზოში, პარკინგსა და ვიწრო ქუჩაში.", img: "/img/service-oboba-2.jpg" },
+  { title: "ავარიული ევაკუაცია", text: "დაზიანებული ავტომობილის ამოყვანა და გადაყვანა.", img: "/img/service-crash-2.jpg" },
 ];
 
 const PRICING = [
@@ -32,30 +32,12 @@ const PRICING = [
 ];
 
 const FAQ = [
-  {
-    q: "რა ღირს ევაკუატორის გამოძახება?",
-    a: "ფასი დამოკიდებულია მანძილზე, ავტომობილის ტიპსა და იმაზე, რამდენად რთულია მასთან მისვლა. დაგვირეკეთ, აღწერეთ სიტუაცია და ზუსტ თანხას ტელეფონშივე გეტყვით.",
-  },
-  {
-    q: "რამდენ ხანში მოხვალთ?",
-    a: "დრო იმაზეა დამოკიდებული, სად დგას ავტომობილი. ზარის დროს გეტყვით, რამდენ ხანში მოვა უახლოესი ევაკუატორი.",
-  },
-  {
-    q: "სად ემსახურებით?",
-    a: "თბილისსა და საქართველოს რეგიონებში. მიმართულება ზარის დროს დაზუსტდება.",
-  },
-  {
-    q: "დაზიანებული ავტომობილი გადაგყავთ?",
-    a: "დიახ. დაგვირეკეთ და აღწერეთ ავტომობილის მდგომარეობა — შესაბამის ევაკუატორს გამოგიგზავნით.",
-  },
-  {
-    q: "როგორი ევაკუატორი მჭირდება?",
-    a: "ეს ავტომობილის ტიპსა და დგომის ადგილზეა დამოკიდებული. თქვენ არ გჭირდებათ ამის გადაწყვეტა — აღწერეთ სიტუაცია და ჩვენ შევარჩევთ.",
-  },
-  {
-    q: "როგორ ხდება ანგარიშსწორება?",
-    a: "გადახდის პირობებს ტელეფონში შეგითანხმებთ.",
-  },
+  { q: "რა ღირს ევაკუატორის გამოძახება?", a: "ფასი დამოკიდებულია მანძილსა და ავტომობილის ტიპზე. დასაზუსტებლად დაგვირეკეთ." },
+  { q: "რამდენ ხანში მოხვალთ?", a: "დამოკიდებულია ლოკაციაზე. დასაზუსტებლად დაგვირეკეთ." },
+  { q: "სად ემსახურებით?", a: "თბილისი და საქართველოს რეგიონები." },
+  { q: "დაზიანებული ავტომობილი გადაგყავთ?", a: "დიახ. დეტალებისთვის დაგვირეკეთ." },
+  { q: "როგორი ევაკუატორი მჭირდება?", a: "დამოკიდებულია ავტომობილის ტიპსა და დგომის ადგილზე. დაგვირეკეთ და დაზუსტდება." },
+  { q: "როგორ ხდება ანგარიშსწორება?", a: "დაზუსტდება ზარის დროს." },
 ];
 
 function CallButton({ big = false, className = "" }: { big?: boolean; className?: string }) {
@@ -99,9 +81,8 @@ export default function Home() {
             </h1>
 
             <p className="enter mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink/60 sm:text-lg" style={{ animationDelay: "230ms" }}>
-              დაგვირეკეთ და აღწერეთ სიტუაცია — ავტომობილის უსაფრთხო გადაყვანა
-              თბილისსა და საქართველოს რეგიონებში. შესაფერის ევაკუატორს ჩვენ
-              შევარჩევთ, ფასსა და დროს კი ტელეფონშივე შეგითანხმებთ.
+              ავტომობილის გადაყვანა თბილისსა და საქართველოს რეგიონებში.
+              დეტალებისა და ფასისთვის დაგვირეკეთ.
             </p>
 
             <div className="enter mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ animationDelay: "320ms" }}>
@@ -139,11 +120,6 @@ export default function Home() {
                     priority
                     className="lift w-full"
                   />
-                  <span className="absolute -right-2 top-0 hidden size-[76px] rotate-[10deg] place-items-center rounded-full bg-brand text-center text-[11px] font-black leading-tight text-white shadow-xl shadow-brand/30 sm:grid">
-                    24/7
-                    <br />
-                    ყოველდღე
-                  </span>
                 </div>
 
                 {/* რბილი ჩრდილი მიწაზე */}
@@ -159,9 +135,9 @@ export default function Home() {
           <div className="relative mt-6 border-t border-ink/5 bg-cream-deep/60">
             <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-ink/5 px-5 lg:grid-cols-4 lg:px-8">
               {[
-                { icon: Clock3, t: "გამოძახება 24 საათი" },
-                { icon: Wallet, t: "ფასი ზარის დროს" },
-                { icon: ShieldCheck, t: "უსაფრთხო გადაყვანა" },
+                { icon: Clock3, t: "გამოძახება ტელეფონით" },
+                { icon: Wallet, t: "ფასი ზარის დროს ზუსტდება" },
+                { icon: ShieldCheck, t: "სტანდარტული და ობობა" },
                 { icon: MapPin, t: "თბილისი და რეგიონები" },
               ].map(({ icon: I, t }, i) => (
                 <Reveal key={t} delay={i * 90} className="flex items-center justify-center gap-2.5 px-3 py-5">
@@ -192,19 +168,18 @@ export default function Home() {
               <div className="p-8 sm:p-12 lg:p-14">
                 <Eyebrow>ჩვენ შესახებ</Eyebrow>
                 <h2 className="headline tt text-3xl font-black sm:text-4xl">
-                  ავტომობილს<br />
-                  <span className="text-brand-soft">უსაფრთხოდ გადავიყვანთ</span>
+                  ევაკუატორი<br />
+                  <span className="text-brand-soft">გამოძახებით</span>
                 </h2>
                 <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
-                  გამოძახება მარტივია: დაგვირეკავთ, ამბობთ სად დგას ავტომობილი
-                  და სად გჭირდებათ გადაყვანა. დანარჩენს ჩვენ მოვაგვარებთ.
+                  თბილისი და საქართველოს რეგიონები.
                 </p>
 
                 <ul className="mt-7 space-y-3">
                   {[
-                    "ზარზე ცოცხალი ოპერატორი გპასუხობთ",
-                    "ავტომობილის ტიპს შესაფერის ევაკუატორს შევურჩევთ",
-                    "პირობებს წინასწარ, ტელეფონში შევათანხმებთ",
+                    "სტანდარტული, ბრტყელძარიანი ევაკუატორი",
+                    "ობობა — ამწე-მანიპულატორით",
+                    "ავარიული ავტომობილის გადაყვანა",
                   ].map((t, i) => (
                     <Reveal as="li" key={t} delay={120 + i * 100} className="flex gap-3 text-sm text-white/80">
                       <Check className="mt-0.5 size-4 shrink-0 text-brand-soft" strokeWidth={3} />
@@ -260,6 +235,27 @@ export default function Home() {
           </div>
         </section>
 
+        {/* --------------------------------- ფოტო-ბლოკი --------------------------------- */}
+        <section className="bg-white px-5 pb-16 sm:pb-24 lg:px-8">
+          <Reveal className="group relative mx-auto flex min-h-[440px] max-w-7xl items-end overflow-hidden rounded-4xl bg-ink sm:min-h-[520px] sm:rounded-5xl">
+            <Image
+              src="/img/breakdown.jpg"
+              alt="მძღოლები გაფუჭებულ ავტომობილთან ევაკუატორს იძახებენ"
+              fill
+              sizes="100vw"
+              className="object-cover object-[center_38%] transition duration-[1.4s] group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-transparent sm:bg-gradient-to-r sm:from-ink/90 sm:via-ink/45 sm:to-transparent" />
+
+            <div className="relative w-full p-8 sm:max-w-lg sm:p-12 lg:p-14">
+              <h2 className="headline tt text-3xl font-black text-white sm:text-4xl">
+                მანქანა გაგიფუჭდათ?
+              </h2>
+              <CallButton big className="mt-7" />
+            </div>
+          </Reveal>
+        </section>
+
         {/* --------------------------------- დაფარვა --------------------------------- */}
         <section id="coverage" className="scroll-mt-24 bg-white px-5 py-16 pt-24 sm:py-24 lg:px-8">
           <div className="mx-auto max-w-7xl">
@@ -269,7 +265,7 @@ export default function Home() {
                 სად <span className="text-brand">ვმუშაობთ</span>
               </h2>
               <p className="mt-4 text-[15px] text-ink/55">
-                ბაზა თბილისშია, გამოძახებას ვიღებთ საქართველოს ნებისმიერი წერტილიდან.
+                თბილისი და საქართველოს რეგიონები.
               </p>
             </Reveal>
 
@@ -286,11 +282,11 @@ export default function Home() {
             <Reveal className="mx-auto max-w-xl text-center">
               <Eyebrow>ფასი</Eyebrow>
               <h2 className="headline tt text-3xl font-black sm:text-5xl">
-                ფასს <span className="text-brand">ზარის დროს</span> შეგითანხმებთ
+                ფასი <span className="text-brand">ზარის დროს</span> ზუსტდება
               </h2>
               <p className="mt-4 text-[15px] text-ink/55">
-                თანხა დამოკიდებულია მანძილზე, ავტომობილის ტიპსა და მისვლის
-                სირთულეზე. დაგვირეკეთ — ზუსტ ფასს ადგილზე მისვლამდე გეტყვით.
+                ფასი დამოკიდებულია მანძილსა და ავტომობილის ტიპზე.
+                დასაზუსტებლად დაგვირეკეთ.
               </p>
             </Reveal>
 
@@ -363,11 +359,8 @@ export default function Home() {
             />
             <div className="relative">
               <h2 className="headline tt mx-auto max-w-xl text-3xl font-black text-white sm:text-5xl">
-                მანქანა გაგიფუჭდა?
+                ევაკუატორის გამოძახება
               </h2>
-              <p className="mx-auto mt-4 max-w-md text-[15px] text-white/85">
-                ერთი ზარი — და ევაკუატორი გზაშია.
-              </p>
               <a
                 href={HREF}
                 className="group relative mt-9 inline-flex items-center gap-3 tt rounded-full bg-white px-8 py-5 text-xl font-black text-ink shadow-2xl transition duration-300 hover:scale-[1.03] sm:text-2xl"
@@ -391,7 +384,7 @@ export default function Home() {
                 <span className="text-[17px] font-extrabold">ევაკუატორი</span>
               </div>
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">
-                ევაკუატორის გამოძახება თბილისსა და მთელ საქართველოში, 24/7.
+                ევაკუატორის გამოძახება თბილისსა და საქართველოს რეგიონებში.
               </p>
               <a href={HREF} className="mt-5 inline-block text-2xl font-black tracking-tight transition hover:text-brand-soft">
                 {TEL_DISPLAY}
@@ -410,8 +403,7 @@ export default function Home() {
             <div>
               <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">კონტაქტი</h3>
               <ul className="mt-4 space-y-2.5 text-sm text-white/60">
-                <li className="flex items-center gap-2"><MapPin className="size-4 shrink-0" /> თბილისი, საქართველო</li>
-                <li className="flex items-center gap-2"><Clock3 className="size-4 shrink-0" /> 24/7 — ყოველდღე</li>
+                <li className="flex items-center gap-2"><MapPin className="size-4 shrink-0" /> თბილისი და რეგიონები</li>
                 <li className="flex items-center gap-2">
                   <Phone className="size-4 shrink-0" />
                   <a href={HREF} className="transition hover:text-white">+995 {TEL_DISPLAY}</a>
@@ -421,7 +413,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-7 text-xs text-white/40 sm:flex-row">
-            <p>© {new Date().getFullYear()} ევაკუატორი 24/7</p>
+            <p>© {new Date().getFullYear()} ევაკუატორი</p>
             <p>გამოძახება: <a href={HREF} className="font-bold text-white/70 transition hover:text-white">{TEL_DISPLAY}</a></p>
           </div>
         </div>
