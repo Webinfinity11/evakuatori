@@ -34,7 +34,7 @@ export default function SiteHeader({ tel, telDisplay }: { tel: string; telDispla
           scrolled ? "h-16" : "h-[76px]"
         }`}
       >
-        <a href="#" className="group flex items-center gap-2.5">
+        <a href="#" className="group flex items-center gap-3">
           <span
             className={`grid place-items-center rounded-full bg-white p-1 shadow-md shadow-ink/10 ring-1 ring-ink/5 transition-all duration-300 ${
               scrolled ? "size-11" : "size-14"
@@ -49,7 +49,12 @@ export default function SiteHeader({ tel, telDisplay }: { tel: string; telDispla
               className="size-full transition-transform duration-300 group-hover:rotate-6"
             />
           </span>
-          <span className="text-lg font-extrabold tracking-tight">ევაკუატორი</span>
+          <span className="flex flex-col leading-none">
+            <span className="text-lg font-extrabold tracking-tight">ევაკუატორი</span>
+            <span className="mt-1 text-[11px] font-bold tracking-[0.08em] text-brand">
+              gadavikvanot.ge
+            </span>
+          </span>
         </a>
 
         <nav className="hidden items-center gap-8 text-sm font-semibold text-ink/60 md:flex">

@@ -399,7 +399,12 @@ export default function Home() {
                 <span className="grid size-14 place-items-center rounded-full bg-white p-1 shadow-lg shadow-black/20">
                   <Image src="/img/logo-v2.png" alt="ევაკუატორი" width={56} height={56} className="size-full" />
                 </span>
-                <span className="text-lg font-extrabold">ევაკუატორი</span>
+                <span className="flex flex-col leading-none">
+                  <span className="text-lg font-extrabold">ევაკუატორი</span>
+                  <span className="mt-1 text-[11px] font-bold tracking-[0.08em] text-brand-soft">
+                    gadavikvanot.ge
+                  </span>
+                </span>
               </div>
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">
                 ევაკუატორის გამოძახება თბილისსა და საქართველოს რეგიონებში.
