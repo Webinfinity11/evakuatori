@@ -45,7 +45,7 @@ function CallButton({ big = false, className = "" }: { big?: boolean; className?
     <a
       href={HREF}
       className={`group relative inline-flex items-center gap-3 overflow-hidden tt rounded-full bg-brand font-extrabold text-white shadow-lg shadow-brand/25 transition duration-300 hover:bg-[#d95614] hover:shadow-xl hover:shadow-brand/40 active:scale-[0.98] ${
-        big ? "px-7 py-4 text-lg" : "px-5 py-3 text-[15px]"
+        big ? "px-5 py-3.5 text-base sm:px-7 sm:py-4 sm:text-lg" : "px-5 py-3 text-[15px]"
       } ${className}`}
     >
       <span className="grid shrink-0 place-items-center rounded-full bg-white/20 p-1.5 transition duration-300 group-hover:rotate-[18deg]">
@@ -74,21 +74,21 @@ export default function Home() {
             aria-hidden
           />
 
-          <div className="relative mx-auto max-w-7xl px-5 pt-16 text-center sm:pt-24 lg:px-8">
-            <h1 className="headline tt mx-auto max-w-4xl text-[40px] font-black sm:text-6xl lg:text-[68px]">
+          <div className="relative mx-auto max-w-7xl px-5 pt-10 text-center sm:pt-24 lg:px-8">
+            <h1 className="headline tt mx-auto max-w-4xl text-[32px] font-black sm:text-6xl lg:text-[68px]">
               <span className="enter block" style={{ animationDelay: "60ms" }}>ევაკუატორის გამოძახება</span>
             </h1>
 
-            <p className="enter mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink/60 sm:text-lg" style={{ animationDelay: "230ms" }}>
+            <p className="enter mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/60 sm:mt-6 sm:text-lg" style={{ animationDelay: "230ms" }}>
               ავტომობილის გადაყვანა თბილისსა და საქართველოს რეგიონებში.
               დეტალებისა და ფასისთვის დაგვირეკეთ.
             </p>
 
-            <div className="enter mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ animationDelay: "320ms" }}>
+            <div className="enter mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:mt-8 sm:gap-3" style={{ animationDelay: "320ms" }}>
               <CallButton big />
               <a
                 href="#prices"
-                className="group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white tt px-6 py-4 text-base font-bold text-ink transition duration-300 hover:border-ink/30 hover:shadow-md"
+                className="group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white tt px-5 py-3.5 text-sm font-bold text-ink sm:px-6 sm:py-4 sm:text-base transition duration-300 hover:border-ink/30 hover:shadow-md"
               >
                 ფასები
                 <ChevronDown className="size-4 text-ink/40 transition group-hover:translate-y-0.5" />
@@ -96,7 +96,7 @@ export default function Home() {
             </div>
 
             {/* ევაკუატორი — რეფერენსის პროპორციაზე, ჩრდილითა და დეკორით */}
-            <div className="relative mx-auto mt-10 max-w-3xl sm:mt-12">
+            <div className="relative mx-auto mt-6 max-w-3xl sm:mt-12">
               <svg
                 className="pointer-events-none absolute -inset-x-24 top-1/2 hidden h-[260px] -translate-y-1/2 lg:block"
                 viewBox="0 0 1200 260"
