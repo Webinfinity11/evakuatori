@@ -397,7 +397,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-2.5">
                 <span className="grid size-14 place-items-center rounded-full bg-white p-1 shadow-lg shadow-black/20">
-                  <Image src="/img/logo.png" alt="ევაკუატორი" width={56} height={56} className="size-full" />
+                  <Image src="/img/logo-v2.png" alt="ევაკუატორი" width={56} height={56} className="size-full" />
                 </span>
                 <span className="text-lg font-extrabold">ევაკუატორი</span>
               </div>

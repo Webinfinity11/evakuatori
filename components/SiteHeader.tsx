@@ -41,7 +41,7 @@ export default function SiteHeader({ tel, telDisplay }: { tel: string; telDispla
             }`}
           >
             <Image
-              src="/img/logo.png"
+              src="/img/logo-v2.png"
               alt="ევაკუატორი"
               width={56}
               height={56}
