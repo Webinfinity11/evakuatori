@@ -77,7 +77,6 @@ export default function Home() {
           <div className="relative mx-auto max-w-7xl px-5 pt-16 text-center sm:pt-24 lg:px-8">
             <h1 className="headline tt mx-auto max-w-4xl text-[40px] font-black sm:text-6xl lg:text-[68px]">
               <span className="enter block" style={{ animationDelay: "60ms" }}>ევაკუატორის გამოძახება</span>
-              <span className="enter block text-brand" style={{ animationDelay: "140ms" }}>ერთი ზარით</span>
             </h1>
 
             <p className="enter mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink/60 sm:text-lg" style={{ animationDelay: "230ms" }}>
