@@ -29,12 +29,6 @@ const PRICING = [
     featured: true,
     text: "ეზო, პარკინგი, ვიწრო ქუჩა — იქ, სადაც ბრტყელი ვერ შედის.",
   },
-  {
-    name: "რეგიონები",
-    price: null,
-    unit: "შეთანხმებით",
-    text: "თბილისიდან რეგიონში, ან რეგიონიდან თბილისში.",
-  },
 ];
 
 const FAQ = [
@@ -296,7 +290,7 @@ export default function Home() {
               </p>
             </Reveal>
 
-            <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            <div className="mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-2">
               {PRICING.map((t, i) => (
                 <Reveal
                   as="article"
@@ -402,8 +396,10 @@ export default function Home() {
           <div className="grid gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <div className="flex items-center gap-2.5">
-                <Image src="/img/logo.png" alt="ევაკუატორი" width={44} height={44} className="size-11" />
-                <span className="text-[17px] font-extrabold">ევაკუატორი</span>
+                <span className="grid size-14 place-items-center rounded-full bg-white p-1 shadow-lg shadow-black/20">
+                  <Image src="/img/logo.png" alt="ევაკუატორი" width={56} height={56} className="size-full" />
+                </span>
+                <span className="text-lg font-extrabold">ევაკუატორი</span>
               </div>
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">
                 ევაკუატორის გამოძახება თბილისსა და საქართველოს რეგიონებში.

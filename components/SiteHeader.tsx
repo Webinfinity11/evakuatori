@@ -35,15 +35,21 @@ export default function SiteHeader({ tel, telDisplay }: { tel: string; telDispla
         }`}
       >
         <a href="#" className="group flex items-center gap-2.5">
-          <Image
-            src="/img/logo.png"
-            alt="ევაკუატორი"
-            width={44}
-            height={44}
-            priority
-            className={`transition-all duration-300 group-hover:rotate-6 ${scrolled ? "size-9" : "size-11"}`}
-          />
-          <span className="text-[17px] font-extrabold tracking-tight">ევაკუატორი</span>
+          <span
+            className={`grid place-items-center rounded-full bg-white p-1 shadow-md shadow-ink/10 ring-1 ring-ink/5 transition-all duration-300 ${
+              scrolled ? "size-11" : "size-14"
+            }`}
+          >
+            <Image
+              src="/img/logo.png"
+              alt="ევაკუატორი"
+              width={56}
+              height={56}
+              priority
+              className="size-full transition-transform duration-300 group-hover:rotate-6"
+            />
+          </span>
+          <span className="text-lg font-extrabold tracking-tight">ევაკუატორი</span>
         </a>
 
         <nav className="hidden items-center gap-8 text-sm font-semibold text-ink/60 md:flex">
