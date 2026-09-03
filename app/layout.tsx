@@ -53,7 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
+            // ანიმაციები მხოლოდ მაშინ, როცა გვერდი ხილულია. ფონურ ტაბში CSS
+            // ანიმაცია არ მიდის და კონტენტი opacity:0-ზე გაიყინებოდა.
+            __html: "if(!document.hidden)document.documentElement.classList.add('js')",
           }}
         />
       </head>
