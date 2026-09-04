@@ -16,8 +16,8 @@ const SERVICES = [
 ];
 
 const FLEET = [
-  { name: "ობობა ევაკუატორი", spec: "ამწე-მანიპულატორით", img: "/img/fleet-oboba.jpg" },
-  { name: "სტანდარტული ევაკუატორი", spec: "ბრტყელძარიანი", img: "/img/fleet-flatbed.jpg" },
+  { name: "ობობა ევაკუატორი", img: "/img/fleet-oboba.jpg" },
+  { name: "სტანდარტული ევაკუატორი", img: "/img/fleet-flatbed.jpg" },
 ];
 
 const PRICING = [
@@ -273,9 +273,8 @@ export default function Home() {
                       className="object-cover transition duration-[1.2s] group-hover:scale-105"
                     />
                   </div>
-                  <div className="flex items-baseline justify-between gap-3 p-5">
+                  <div className="p-5">
                     <h3 className="text-[15px] font-extrabold sm:text-base">{f.name}</h3>
-                    <p className="shrink-0 text-[13px] text-ink/50">{f.spec}</p>
                   </div>
                 </Reveal>
               ))}
