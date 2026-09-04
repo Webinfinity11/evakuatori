@@ -15,6 +15,11 @@ const SERVICES = [
   { title: "ავარიული ევაკუაცია", text: "დაზიანებული ავტომობილის ამოყვანა და გადაყვანა.", img: "/img/service-crash-2.jpg" },
 ];
 
+const FLEET = [
+  { name: "ობობა ევაკუატორი", spec: "ამწე-მანიპულატორით", img: "/img/fleet-oboba.jpg" },
+  { name: "სტანდარტული ევაკუატორი", spec: "ბრტყელძარიანი", img: "/img/fleet-flatbed.jpg" },
+];
+
 const PRICING = [
   {
     name: "სტანდარტული",
@@ -227,6 +232,43 @@ export default function Home() {
                     >
                       <ArrowUpRight className="size-5" strokeWidth={2.5} />
                     </a>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* -------------------------------- ავტოპარკი -------------------------------- */}
+        <section id="fleet" className="scroll-mt-24 bg-white px-5 pb-16 sm:pb-24 lg:px-8">
+          <div className="mx-auto max-w-5xl">
+            <Reveal className="mx-auto max-w-xl text-center">
+              <Eyebrow>ავტოპარკი</Eyebrow>
+              <h2 className="headline tt text-3xl font-black sm:text-4xl">
+                ჩვენი <span className="text-brand">მანქანები</span>
+              </h2>
+            </Reveal>
+
+            <div className="mt-10 grid gap-5 sm:grid-cols-2">
+              {FLEET.map((f, i) => (
+                <Reveal
+                  as="article"
+                  key={f.name}
+                  delay={i * 130}
+                  className="hover-lift group overflow-hidden rounded-4xl border border-ink/10 bg-white"
+                >
+                  <div className="relative aspect-4/3 overflow-hidden">
+                    <Image
+                      src={f.img}
+                      alt={f.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      className="object-cover transition duration-[1.2s] group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex items-baseline justify-between gap-3 p-5">
+                    <h3 className="text-[15px] font-extrabold sm:text-base">{f.name}</h3>
+                    <p className="shrink-0 text-[13px] text-ink/50">{f.spec}</p>
                   </div>
                 </Reveal>
               ))}

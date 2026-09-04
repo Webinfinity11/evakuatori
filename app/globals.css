@@ -48,7 +48,7 @@
    შეცდომა, ნელი ქსელი), reveal-fallback 2.5 წამში მაინც აჩვენებს — რომ
    კონტენტი სამუდამოდ უხილავი არ დარჩეს. */
 .js .reveal      { opacity: 0; animation: reveal-fallback 0s linear 2.5s forwards; }
-.reveal-in       { animation: fade-up 0.7s var(--ease-out-soft) forwards; }
+.js .reveal-in   { animation: fade-up 0.7s var(--ease-out-soft) forwards; }
 
 @keyframes reveal-fallback { to { opacity: 1; } }
 

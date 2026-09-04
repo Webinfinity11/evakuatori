@@ -6,6 +6,7 @@ import { Phone } from "lucide-react";
 
 const NAV = [
   { href: "#services", label: "სერვისები" },
+  { href: "#fleet", label: "ავტოპარკი" },
   { href: "#coverage", label: "დაფარვა" },
   { href: "#prices", label: "ფასი" },
   { href: "#faq", label: "კითხვები" },
