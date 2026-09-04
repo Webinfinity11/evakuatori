@@ -1,5 +1,8 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import GeorgiaMap from "@/components/GeorgiaMap";
+import { isLocale } from "@/lib/i18n";
+import { getDictionary } from "@/lib/dictionaries";
 import SiteHeader from "@/components/SiteHeader";
 import Reveal from "@/components/Reveal";
 import Marquee from "@/components/Marquee";
@@ -9,41 +12,9 @@ const TEL = "568120120";
 const TEL_DISPLAY = "568 120 120";
 const HREF = `tel:+995${TEL}`;
 
-const SERVICES = [
-  { title: "სტანდარტული ევაკუატორი", text: "ბრტყელძარიანი, მსუბუქი ავტომობილისთვის.", img: "/img/service-standard-2.jpg" },
-  { title: "ობობა ევაკუატორი", text: "ეზოში, პარკინგსა და ვიწრო ქუჩაში.", img: "/img/service-oboba-2.jpg" },
-  { title: "ავარიული ევაკუაცია", text: "დაზიანებული ავტომობილის ამოყვანა და გადაყვანა.", img: "/img/service-crash-2.jpg" },
-];
-
-const FLEET = [
-  { name: "ობობა ევაკუატორი", img: "/img/fleet-oboba.jpg" },
-  { name: "სტანდარტული ევაკუატორი", img: "/img/fleet-flatbed.jpg" },
-];
-
-const PRICING = [
-  {
-    name: "სტანდარტული",
-    price: "60",
-    unit: "₾-დან",
-    text: "ბრტყელძარიანი ევაკუატორი — მისამართიდან მისამართამდე.",
-  },
-  {
-    name: "ობობა ევაკუატორი",
-    price: "120",
-    unit: "₾-დან",
-    featured: true,
-    text: "ეზო, პარკინგი, ვიწრო ქუჩა — იქ, სადაც ბრტყელი ვერ შედის.",
-  },
-];
-
-const FAQ = [
-  { q: "რა ღირს ევაკუატორის გამოძახება?", a: "სტანდარტული ევაკუატორი — 60 ლარიდან, ობობა — 120 ლარიდან. საბოლოო თანხა მანძილსა და ავტომობილის ტიპზეა დამოკიდებული. დასაზუსტებლად დაგვირეკეთ." },
-  { q: "რამდენ ხანში მოხვალთ?", a: "დამოკიდებულია ლოკაციაზე. დასაზუსტებლად დაგვირეკეთ." },
-  { q: "სად ემსახურებით?", a: "თბილისი და საქართველოს რეგიონები." },
-  { q: "დაზიანებული ავტომობილი გადაგყავთ?", a: "დიახ. დეტალებისთვის დაგვირეკეთ." },
-  { q: "როგორი ევაკუატორი მჭირდება?", a: "დამოკიდებულია ავტომობილის ტიპსა და დგომის ადგილზე. დაგვირეკეთ და დაზუსტდება." },
-  { q: "როგორ ხდება ანგარიშსწორება?", a: "დაზუსტდება ზარის დროს." },
-];
+const SERVICE_IMGS = ["/img/service-standard-2.jpg", "/img/service-oboba.jpg", "/img/service-crash-2.jpg"];
+const FLEET_IMGS = ["/img/fleet-oboba.jpg", "/img/fleet-flatbed.jpg"];
+const PRICE_VALUES = ["60", "120"];
 
 function CallButton({ big = false, className = "" }: { big?: boolean; className?: string }) {
   return (
@@ -65,10 +36,14 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   return <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand">{children}</p>;
 }
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const d = getDictionary(locale);
+
   return (
     <>
-      <SiteHeader tel={TEL} telDisplay={TEL_DISPLAY} />
+      <SiteHeader tel={TEL} telDisplay={TEL_DISPLAY} locale={locale} nav={d.nav} />
 
       <main>
         {/* ---------------------------------- ჰერო ---------------------------------- */}
@@ -81,12 +56,11 @@ export default function Home() {
 
           <div className="relative mx-auto max-w-7xl px-5 pt-10 text-center sm:pt-24 lg:px-8">
             <h1 className="headline tt mx-auto max-w-4xl text-[32px] font-black sm:text-6xl lg:text-[68px]">
-              <span className="enter block" style={{ animationDelay: "60ms" }}>ევაკუატორის გამოძახება</span>
+              <span className="enter block" style={{ animationDelay: "60ms" }}>{d.hero.title}</span>
             </h1>
 
             <p className="enter mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-ink/60 sm:mt-6 sm:text-lg" style={{ animationDelay: "230ms" }}>
-              ავტომობილის გადაყვანა თბილისსა და საქართველოს რეგიონებში.
-              დეტალებისა და ფასისთვის დაგვირეკეთ.
+              {d.hero.lead}
             </p>
 
             <div className="enter mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:mt-8 sm:gap-3" style={{ animationDelay: "320ms" }}>
@@ -95,7 +69,7 @@ export default function Home() {
                 href="#prices"
                 className="group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white tt px-5 py-3.5 text-sm font-bold text-ink sm:px-6 sm:py-4 sm:text-base transition duration-300 hover:border-ink/30 hover:shadow-md"
               >
-                ფასები
+                {d.hero.pricesBtn}
                 <ChevronDown className="size-4 text-ink/40 transition group-hover:translate-y-0.5" />
               </a>
             </div>
@@ -139,10 +113,10 @@ export default function Home() {
           <div className="relative mt-6 border-t border-ink/5 bg-cream-deep/60">
             <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-ink/5 px-5 lg:grid-cols-4 lg:px-8">
               {[
-                { icon: Clock3, t: "გამოძახება ტელეფონით" },
-                { icon: Wallet, t: "ფასი ზარის დროს ზუსტდება" },
-                { icon: ShieldCheck, t: "სტანდარტული და ობობა" },
-                { icon: MapPin, t: "თბილისი და რეგიონები" },
+                { icon: Clock3, t: d.strip.call },
+                { icon: Wallet, t: d.strip.price },
+                { icon: ShieldCheck, t: d.strip.types },
+                { icon: MapPin, t: d.strip.area },
               ].map(({ icon: I, t }, i) => (
                 <Reveal key={t} delay={i * 90} className="flex items-center justify-center gap-2.5 px-3 py-5">
                   <I className="size-5 shrink-0 text-brand" strokeWidth={2} />
@@ -153,7 +127,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Marquee />
+        <Marquee items={d.marquee} />
 
         {/* ------------------------------- ჩვენ შესახებ ------------------------------- */}
         <section className="bg-cream px-5 py-16 sm:py-20 lg:px-8">
@@ -162,7 +136,7 @@ export default function Home() {
               <div className="group relative min-h-[280px] overflow-hidden lg:min-h-full">
                 <Image
                   src="/img/sunset.jpg"
-                  alt="ევაკუატორი ავტომობილს ტვირთავს"
+                  alt={d.about.imgAlt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover object-[64%_center] transition duration-[1.2s] group-hover:scale-105"
@@ -170,21 +144,17 @@ export default function Home() {
               </div>
 
               <div className="p-8 sm:p-12 lg:p-14">
-                <Eyebrow>ჩვენ შესახებ</Eyebrow>
+                <Eyebrow>{d.about.eyebrow}</Eyebrow>
                 <h2 className="headline tt text-3xl font-black sm:text-4xl">
-                  ევაკუატორი<br />
-                  <span className="text-brand-soft">გამოძახებით</span>
+                  {d.about.title1}<br />
+                  <span className="text-brand-soft">{d.about.title2}</span>
                 </h2>
                 <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
-                  თბილისი და საქართველოს რეგიონები.
+                  {d.about.text}
                 </p>
 
                 <ul className="mt-7 space-y-3">
-                  {[
-                    "სტანდარტული, ბრტყელძარიანი ევაკუატორი",
-                    "ობობა — ამწე-მანიპულატორით",
-                    "ავარიული ავტომობილის გადაყვანა",
-                  ].map((t, i) => (
+                  {d.about.points.map((t, i) => (
                     <Reveal as="li" key={t} delay={120 + i * 100} className="flex gap-3 text-sm text-white/80">
                       <Check className="mt-0.5 size-4 shrink-0 text-brand-soft" strokeWidth={3} />
                       {t}
@@ -202,21 +172,20 @@ export default function Home() {
         <section id="services" className="scroll-mt-24 bg-white px-5 py-16 sm:py-24 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <Reveal className="mx-auto max-w-xl text-center">
-              <Eyebrow>სერვისები</Eyebrow>
+              <Eyebrow>{d.services.eyebrow}</Eyebrow>
               <h2 className="headline tt text-3xl font-black sm:text-5xl">
-                სამი ევაკუატორი, <span className="text-brand">ერთი ნომერი</span>
+                {d.services.title1} <span className="text-brand">{d.services.title2}</span>
               </h2>
               <p className="mt-4 text-[15px] text-ink/55">
-                რა სიტუაციაშიც არ უნდა აღმოჩნდეს ავტომობილი — შესაბამისი
-                ტექნიკა მოვა.
+                {d.services.lead}
               </p>
             </Reveal>
 
             <div className="mt-12 grid gap-5 md:grid-cols-3">
-              {SERVICES.map((s, i) => (
+              {d.services.items.map((s, i) => (
                 <Reveal as="article" key={s.title} delay={i * 130} className="hover-lift group relative flex min-h-[400px] flex-col justify-end overflow-hidden rounded-4xl bg-ink">
                   <Image
-                    src={s.img}
+                    src={SERVICE_IMGS[i]}
                     alt={s.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -231,7 +200,7 @@ export default function Home() {
                     </div>
                     <a
                       href={HREF}
-                      aria-label={`დარეკვა — ${s.title}`}
+                      aria-label={`${d.services.callAria} ${s.title}`}
                       className="grid size-11 shrink-0 place-items-center rounded-full bg-brand text-white transition duration-300 group-hover:rotate-45 group-hover:scale-110"
                     >
                       <ArrowUpRight className="size-5" strokeWidth={2.5} />
@@ -247,34 +216,34 @@ export default function Home() {
         <section id="fleet" className="scroll-mt-24 bg-white px-5 pb-16 sm:pb-24 lg:px-8">
           <div className="mx-auto max-w-5xl">
             <Reveal className="mx-auto max-w-xl text-center">
-              <Eyebrow>ავტოპარკი</Eyebrow>
+              <Eyebrow>{d.fleet.eyebrow}</Eyebrow>
               <h2 className="headline tt text-3xl font-black sm:text-4xl">
-                ჩვენი <span className="text-brand">მანქანები</span>
+                {d.fleet.title1} <span className="text-brand">{d.fleet.title2}</span>
               </h2>
               <p className="mt-4 text-[15px] text-ink/55">
-                ტექნიკა, რომლითაც ვმუშაობთ.
+                {d.fleet.lead}
               </p>
             </Reveal>
 
             <div className="mt-10 grid gap-5 sm:grid-cols-2">
-              {FLEET.map((f, i) => (
+              {d.fleet.items.map((name, i) => (
                 <Reveal
                   as="article"
-                  key={f.name}
+                  key={name}
                   delay={i * 130}
                   className="hover-lift group overflow-hidden rounded-4xl border border-ink/10 bg-white"
                 >
                   <div className="relative aspect-4/3 overflow-hidden">
                     <Image
-                      src={f.img}
-                      alt={f.name}
+                      src={FLEET_IMGS[i]}
+                      alt={name}
                       fill
                       sizes="(max-width: 640px) 100vw, 50vw"
                       className="object-cover transition duration-[1.2s] group-hover:scale-105"
                     />
                   </div>
                   <div className="p-5">
-                    <h3 className="text-[15px] font-extrabold sm:text-base">{f.name}</h3>
+                    <h3 className="text-[15px] font-extrabold sm:text-base">{name}</h3>
                   </div>
                 </Reveal>
               ))}
@@ -287,7 +256,7 @@ export default function Home() {
           <Reveal className="group relative mx-auto flex min-h-[440px] max-w-7xl items-end overflow-hidden rounded-4xl bg-ink sm:min-h-[520px] sm:rounded-5xl">
             <Image
               src="/img/breakdown.jpg"
-              alt="მძღოლები გაფუჭებულ ავტომობილთან ევაკუატორს იძახებენ"
+              alt={d.breakdown.imgAlt}
               fill
               sizes="100vw"
               className="object-cover object-[center_38%] transition duration-[1.4s] group-hover:scale-105"
@@ -296,7 +265,7 @@ export default function Home() {
 
             <div className="relative w-full p-8 sm:max-w-lg sm:p-12 lg:p-14">
               <h2 className="headline tt text-3xl font-black text-white sm:text-4xl">
-                მანქანა გაგიფუჭდათ?
+                {d.breakdown.title}
               </h2>
               <CallButton big className="mt-7" />
             </div>
@@ -307,17 +276,17 @@ export default function Home() {
         <section id="coverage" className="scroll-mt-24 bg-white px-5 py-16 pt-24 sm:py-24 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <Reveal className="mx-auto max-w-xl text-center">
-              <Eyebrow>დაფარვის ზონა</Eyebrow>
+              <Eyebrow>{d.coverage.eyebrow}</Eyebrow>
               <h2 className="headline tt text-3xl font-black sm:text-5xl">
-                სად <span className="text-brand">ვმუშაობთ</span>
+                {d.coverage.title1} <span className="text-brand">{d.coverage.title2}</span>
               </h2>
               <p className="mt-4 text-[15px] text-ink/55">
-                თბილისი და საქართველოს რეგიონები.
+                {d.coverage.lead}
               </p>
             </Reveal>
 
             <div className="mt-14">
-              <GeorgiaMap />
+              <GeorgiaMap cities={d.coverage.cities} mapAlt={d.coverage.mapAlt} />
             </div>
 
           </div>
@@ -327,24 +296,25 @@ export default function Home() {
         <section id="prices" className="scroll-mt-24 bg-cream px-5 py-16 sm:py-24 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <Reveal className="mx-auto max-w-xl text-center">
-              <Eyebrow>ფასი</Eyebrow>
+              <Eyebrow>{d.prices.eyebrow}</Eyebrow>
               <h2 className="headline tt text-3xl font-black sm:text-5xl">
-                ფასი <span className="text-brand">ზარის დროს</span> ზუსტდება
+                {d.prices.title1} <span className="text-brand">{d.prices.title2}</span> {d.prices.title3}
               </h2>
               <p className="mt-4 text-[15px] text-ink/55">
-                საწყისი ფასებია. საბოლოო თანხა მანძილსა და ავტომობილის
-                ტიპზეა დამოკიდებული — დასაზუსტებლად დაგვირეკეთ.
+                {d.prices.lead}
               </p>
             </Reveal>
 
             <div className="mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-2">
-              {PRICING.map((t, i) => (
+              {d.prices.items.map((t, i) => {
+                const featured = i === 1;
+                return (
                 <Reveal
                   as="article"
                   key={t.name}
                   delay={i * 130}
                   className={`hover-lift relative flex flex-col rounded-4xl p-8 ${
-                    t.featured
+                    featured
                       ? "bg-ink text-white shadow-2xl shadow-ink/20 lg:-my-3 lg:py-11"
                       : "border border-ink/10 bg-white hover:shadow-lg hover:shadow-ink/5"
                   }`}
@@ -352,37 +322,30 @@ export default function Home() {
                   <h3 className="text-xl font-extrabold">{t.name}</h3>
 
                   <p className="mt-5 flex items-baseline gap-1.5">
-                    {t.price ? (
-                      <>
-                        <span className="headline text-5xl font-black">{t.price}</span>
-                        <span className={`text-sm font-bold ${t.featured ? "text-white/50" : "text-ink/45"}`}>
-                          {t.unit}
-                        </span>
-                      </>
-                    ) : (
-                      <span className={`text-2xl font-black ${t.featured ? "text-white/70" : "text-ink/55"}`}>
-                        {t.unit}
-                      </span>
-                    )}
+                    <span className="headline text-5xl font-black">{PRICE_VALUES[i]}</span>
+                    <span className={`text-sm font-bold ${featured ? "text-white/50" : "text-ink/45"}`}>
+                      {d.prices.unit}
+                    </span>
                   </p>
 
-                  <p className={`mt-4 flex-1 text-sm leading-relaxed ${t.featured ? "text-white/60" : "text-ink/55"}`}>
+                  <p className={`mt-4 flex-1 text-sm leading-relaxed ${featured ? "text-white/60" : "text-ink/55"}`}>
                     {t.text}
                   </p>
 
                   <a
                     href={HREF}
                     className={`group tt mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-extrabold transition duration-300 ${
-                      t.featured
+                      featured
                         ? "bg-brand text-white hover:bg-[#d95614]"
                         : "border border-ink/15 hover:border-brand hover:text-brand"
                     }`}
                   >
                     <Phone className="size-4 transition group-hover:rotate-[18deg]" strokeWidth={2.4} />
-                    ფასის გაგება
+                    {d.prices.cta}
                   </a>
                 </Reveal>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -391,13 +354,13 @@ export default function Home() {
         <section id="faq" className="scroll-mt-24 bg-white px-5 py-16 sm:py-24 lg:px-8">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_1.4fr] lg:gap-20">
             <Reveal>
-              <Eyebrow>კითხვები</Eyebrow>
-              <h2 className="headline tt text-3xl font-black sm:text-4xl">ხშირად გვეკითხებიან</h2>
+              <Eyebrow>{d.faq.eyebrow}</Eyebrow>
+              <h2 className="headline tt text-3xl font-black sm:text-4xl">{d.faq.title}</h2>
               <CallButton className="mt-6" />
             </Reveal>
 
             <div className="divide-y divide-ink/10 border-y border-ink/10">
-              {FAQ.map((f, i) => (
+              {d.faq.items.map((f, i) => (
                 <Reveal key={f.q} delay={i * 70}>
                   <details className="group py-5">
                     <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-[15px] font-bold transition hover:text-brand sm:text-base">
@@ -422,7 +385,7 @@ export default function Home() {
             />
             <div className="relative">
               <h2 className="headline tt mx-auto max-w-xl text-3xl font-black text-white sm:text-5xl">
-                ევაკუატორის გამოძახება
+                {d.cta.title}
               </h2>
               <a
                 href={HREF}
@@ -454,7 +417,7 @@ export default function Home() {
                 </span>
               </div>
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">
-                ევაკუატორის გამოძახება თბილისსა და საქართველოს რეგიონებში.
+                {d.footer.tagline}
               </p>
               <a href={HREF} className="mt-5 inline-block text-2xl font-black tracking-tight transition hover:text-brand-soft">
                 {TEL_DISPLAY}
@@ -462,18 +425,18 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">სერვისები</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">{d.footer.servicesTitle}</h3>
               <ul className="mt-4 space-y-2.5 text-sm text-white/60">
-                {["სტანდარტული ევაკუატორი", "ობობა ევაკუატორი", "ავარიული ევაკუაცია"].map((t) => (
+                {d.footer.services.map((t) => (
                   <li key={t}><a href="#services" className="transition hover:text-white">{t}</a></li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">კონტაქტი</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">{d.footer.contactTitle}</h3>
               <ul className="mt-4 space-y-2.5 text-sm text-white/60">
-                <li className="flex items-center gap-2"><MapPin className="size-4 shrink-0" /> თბილისი და რეგიონები</li>
+                <li className="flex items-center gap-2"><MapPin className="size-4 shrink-0" /> {d.footer.location}</li>
                 <li className="flex items-center gap-2">
                   <Phone className="size-4 shrink-0" />
                   <a href={HREF} className="transition hover:text-white">+995 {TEL_DISPLAY}</a>
@@ -483,8 +446,8 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-7 text-xs text-white/40 sm:flex-row">
-            <p>© {new Date().getFullYear()} ევაკუატორი</p>
-            <p>გამოძახება: <a href={HREF} className="font-bold text-white/70 transition hover:text-white">{TEL_DISPLAY}</a></p>
+            <p>© {new Date().getFullYear()} ევაკუატორი · gadavikvanot.ge</p>
+            <p>{d.footer.callLabel} <a href={HREF} className="font-bold text-white/70 transition hover:text-white">{TEL_DISPLAY}</a></p>
           </div>
         </div>
       </footer>

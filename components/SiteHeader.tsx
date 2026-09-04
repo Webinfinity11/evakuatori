@@ -3,16 +3,21 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Phone } from "lucide-react";
+import type { Locale } from "@/lib/i18n";
+import type { Dict } from "@/lib/dictionaries";
+import LocaleSwitcher from "./LocaleSwitcher";
 
-const NAV = [
-  { href: "#services", label: "სერვისები" },
-  { href: "#fleet", label: "ავტოპარკი" },
-  { href: "#coverage", label: "დაფარვა" },
-  { href: "#prices", label: "ფასი" },
-  { href: "#faq", label: "კითხვები" },
-];
-
-export default function SiteHeader({ tel, telDisplay }: { tel: string; telDisplay: string }) {
+export default function SiteHeader({
+  tel,
+  telDisplay,
+  locale,
+  nav,
+}: {
+  tel: string;
+  telDisplay: string;
+  locale: Locale;
+  nav: Dict["nav"];
+}) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -21,6 +26,14 @@ export default function SiteHeader({ tel, telDisplay }: { tel: string; telDispla
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const links = [
+    { href: "#services", label: nav.services },
+    { href: "#fleet", label: nav.fleet },
+    { href: "#coverage", label: nav.coverage },
+    { href: "#prices", label: nav.prices },
+    { href: "#faq", label: nav.faq },
+  ];
 
   return (
     <header
@@ -31,13 +44,13 @@ export default function SiteHeader({ tel, telDisplay }: { tel: string; telDispla
       }`}
     >
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between px-5 transition-all duration-300 lg:px-8 ${
+        className={`mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 transition-all duration-300 lg:px-8 ${
           scrolled ? "h-16" : "h-[76px]"
         }`}
       >
-        <a href="#" className="group flex items-center gap-3">
+        <a href={`/${locale}`} className="group flex items-center gap-3">
           <span
-            className={`grid place-items-center rounded-full bg-white p-1 shadow-md shadow-ink/10 ring-1 ring-ink/5 transition-all duration-300 ${
+            className={`grid shrink-0 place-items-center rounded-full bg-white p-1 shadow-md shadow-ink/10 ring-1 ring-ink/5 transition-all duration-300 ${
               scrolled ? "size-11" : "size-14"
             }`}
           >
@@ -58,8 +71,8 @@ export default function SiteHeader({ tel, telDisplay }: { tel: string; telDispla
           </span>
         </a>
 
-        <nav className="hidden items-center gap-8 text-sm font-semibold text-ink/60 md:flex">
-          {NAV.map((n) => (
+        <nav className="hidden items-center gap-7 text-sm font-semibold text-ink/60 lg:flex">
+          {links.map((n) => (
             <a
               key={n.href}
               href={n.href}
@@ -70,22 +83,26 @@ export default function SiteHeader({ tel, telDisplay }: { tel: string; telDispla
           ))}
         </nav>
 
-        <a
-          href={`tel:+995${tel}`}
-          className="tt hidden items-center gap-2.5 rounded-full bg-brand px-5 py-3 text-[15px] font-extrabold text-white shadow-lg shadow-brand/25 transition hover:bg-[#d95614] hover:shadow-brand/40 active:scale-[0.98] sm:inline-flex"
-        >
-          <Phone className="size-4" strokeWidth={2.4} />
-          {telDisplay}
-        </a>
+        <div className="flex items-center gap-1">
+          <LocaleSwitcher current={locale} />
 
-        <a
-          href={`tel:+995${tel}`}
-          aria-label={`დარეკვა ${telDisplay}`}
-          className="relative grid size-10 place-items-center rounded-full bg-brand text-white sm:hidden"
-        >
-          <span className="absolute inset-0 rounded-full bg-brand/40 animate-pulse-ring" aria-hidden />
-          <Phone className="relative size-4.5" strokeWidth={2.4} />
-        </a>
+          <a
+            href={`tel:+995${tel}`}
+            className="tt hidden items-center gap-2.5 rounded-full bg-brand px-5 py-3 text-[15px] font-extrabold text-white shadow-lg shadow-brand/25 transition hover:bg-[#d95614] hover:shadow-brand/40 active:scale-[0.98] sm:inline-flex"
+          >
+            <Phone className="size-4" strokeWidth={2.4} />
+            {telDisplay}
+          </a>
+
+          <a
+            href={`tel:+995${tel}`}
+            aria-label={telDisplay}
+            className="relative grid size-10 place-items-center rounded-full bg-brand text-white sm:hidden"
+          >
+            <span className="absolute inset-0 rounded-full bg-brand/40 animate-pulse-ring" aria-hidden />
+            <Phone className="relative size-4.5" strokeWidth={2.4} />
+          </a>
+        </div>
       </div>
     </header>
   );
