@@ -206,6 +206,10 @@ export default function Home() {
               <h2 className="headline tt text-3xl font-black sm:text-5xl">
                 სამი ევაკუატორი, <span className="text-brand">ერთი ნომერი</span>
               </h2>
+              <p className="mt-4 text-[15px] text-ink/55">
+                რა სიტუაციაშიც არ უნდა აღმოჩნდეს ავტომობილი — შესაბამისი
+                ტექნიკა მოვა.
+              </p>
             </Reveal>
 
             <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -247,6 +251,9 @@ export default function Home() {
               <h2 className="headline tt text-3xl font-black sm:text-4xl">
                 ჩვენი <span className="text-brand">მანქანები</span>
               </h2>
+              <p className="mt-4 text-[15px] text-ink/55">
+                ტექნიკა, რომლითაც ვმუშაობთ.
+              </p>
             </Reveal>
 
             <div className="mt-10 grid gap-5 sm:grid-cols-2">
