@@ -46,12 +46,15 @@ function pickLocale(req: NextRequest): Locale {
   const saved = req.cookies.get(COOKIE)?.value;
   if (saved && isLocale(saved)) return saved;
 
+  // CDN-ის ქვეყანა ავტორიტეტულია: თუ მოვიდა, აქვე ვწყვეტთ და IP-ს აღარ ვამოწმებთ.
   const country = (
     req.headers.get("cf-ipcountry") ||
     req.headers.get("x-vercel-ip-country") ||
     ""
   ).toUpperCase();
-  if (country && COUNTRY_LOCALE[country]) return COUNTRY_LOCALE[country];
+  if (country && country !== "XX" && country !== "T1") {
+    return COUNTRY_LOCALE[country] ?? "en";
+  }
 
   const ip = clientIp(req);
   if (ip && isGeorgianIp(ip)) return "ka";
