@@ -2,11 +2,8 @@ export const LOCALES = ["ka", "en", "ru"] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "ka";
 
-/** ქვეყნის კოდი -> ლოკალი. საქართველო ქართულზე, დანარჩენი რუსულენოვანი — რუსულზე. */
-export const COUNTRY_LOCALE: Record<string, Locale> = {
-  GE: "ka",
-  RU: "ru", BY: "ru", KZ: "ru", KG: "ru", TJ: "ru", UZ: "ru", AM: "ru", AZ: "ru", MD: "ru",
-};
+/** Set only when the visitor explicitly chooses a language. */
+export const LOCALE_COOKIE = "locale-preference";
 
 export const LOCALE_NAMES: Record<Locale, string> = {
   ka: "ქართული",

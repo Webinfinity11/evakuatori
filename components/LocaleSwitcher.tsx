@@ -1,21 +1,21 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { LOCALES, LOCALE_NAMES, LOCALE_SHORT, type Locale } from "@/lib/i18n";
+import { LOCALES, LOCALE_NAMES, LOCALE_SHORT, LOCALE_COOKIE, type Locale } from "@/lib/i18n";
 import { Globe, Check } from "lucide-react";
 
 export default function LocaleSwitcher({ current, dark = false }: { current: Locale; dark?: boolean }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   function go(next: Locale) {
     setOpen(false);
     // /ka/foo -> /en/foo
     const rest = pathname.split("/").slice(2).join("/");
-    document.cookie = `locale=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
-    router.push(`/${next}${rest ? `/${rest}` : ""}`);
+    document.cookie = `${LOCALE_COOKIE}=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
+    // A fresh request avoids reusing a route prefetched before the choice.
+    window.location.assign(`/${next}${rest ? `/${rest}` : ""}${window.location.search}${window.location.hash}`);
   }
 
   return (
