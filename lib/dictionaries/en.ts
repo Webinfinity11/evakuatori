@@ -9,8 +9,9 @@ const en: Dict = {
     ogDescription: "Tow truck service in Tbilisi and across Georgia.",
     keywords: ["tow truck Tbilisi", "towing Georgia", "car recovery Tbilisi", "spider tow truck", "accident recovery", "roadside towing Georgia"],
   },
-  nav: { services: "Services", fleet: "Our fleet", coverage: "Coverage", prices: "Pricing", faq: "FAQ" },
+  nav: { brand: "Tow Truck", services: "Services", fleet: "Our fleet", coverage: "Coverage", prices: "Pricing", faq: "FAQ" },
   hero: {
+    imgAlt: "Tow truck carrying a car",
     title: "Tow truck on call",
     lead: "Vehicle transport in Tbilisi and across the regions of Georgia. Call us for details and pricing.",
     pricesBtn: "Pricing",

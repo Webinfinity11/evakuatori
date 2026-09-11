@@ -56,7 +56,7 @@ export default function SiteHeader({
           >
             <Image
               src="/img/logo-v2.png"
-              alt="ევაკუატორი"
+              alt={nav.brand}
               width={56}
               height={56}
               priority
@@ -64,7 +64,7 @@ export default function SiteHeader({
             />
           </span>
           <span className="flex flex-col leading-none">
-            <span className="text-lg font-extrabold tracking-tight">ევაკუატორი</span>
+            <span className="text-lg font-extrabold tracking-tight">{nav.brand}</span>
             <span className="mt-1 text-[11px] font-bold tracking-[0.08em] text-brand">
               gadavikvanot.ge
             </span>

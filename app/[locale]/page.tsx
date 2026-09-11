@@ -92,7 +92,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 <div className="animate-floaty">
                   <Image
                     src="/img/evakuatori.png"
-                    alt="ევაკუატორი ჩატვირთული ავტომობილით"
+                    alt={d.hero.imgAlt}
                     width={1494}
                     height={822}
                     priority
@@ -407,10 +407,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             <div>
               <div className="flex items-center gap-2.5">
                 <span className="grid size-14 place-items-center rounded-full bg-white p-1 shadow-lg shadow-black/20">
-                  <Image src="/img/logo-v2.png" alt="ევაკუატორი" width={56} height={56} className="size-full" />
+                  <Image src="/img/logo-v2.png" alt={d.nav.brand} width={56} height={56} className="size-full" />
                 </span>
                 <span className="flex flex-col leading-none">
-                  <span className="text-lg font-extrabold">ევაკუატორი</span>
+                  <span className="text-lg font-extrabold">{d.nav.brand}</span>
                   <span className="mt-1 text-[11px] font-bold tracking-[0.08em] text-brand-soft">
                     gadavikvanot.ge
                   </span>
@@ -446,7 +446,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
 
           <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-7 text-xs text-white/40 sm:flex-row">
-            <p>© {new Date().getFullYear()} ევაკუატორი · gadavikvanot.ge</p>
+            <p>© {new Date().getFullYear()} {d.nav.brand} · gadavikvanot.ge</p>
             <p>{d.footer.callLabel} <a href={HREF} className="font-bold text-white/70 transition hover:text-white">{TEL_DISPLAY}</a></p>
           </div>
         </div>
