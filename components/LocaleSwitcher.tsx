@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { LOCALES, LOCALE_NAMES, LOCALE_SHORT, LOCALE_COOKIE, type Locale } from "@/lib/i18n";
+import { LOCALES, LOCALE_NAMES, LOCALE_SHORT, type Locale } from "@/lib/i18n";
 import { Globe, Check } from "lucide-react";
 
 export default function LocaleSwitcher({ current, dark = false }: { current: Locale; dark?: boolean }) {
@@ -13,9 +13,11 @@ export default function LocaleSwitcher({ current, dark = false }: { current: Loc
     setOpen(false);
     // /ka/foo -> /en/foo
     const rest = pathname.split("/").slice(2).join("/");
-    document.cookie = `${LOCALE_COOKIE}=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
+    const url = new URL(window.location.href);
+    url.pathname = `/${next}${rest ? `/${rest}` : ""}`;
+    url.searchParams.set("lang", next);
     // A fresh request avoids reusing a route prefetched before the choice.
-    window.location.assign(`/${next}${rest ? `/${rest}` : ""}${window.location.search}${window.location.hash}`);
+    window.location.assign(url.href);
   }
 
   return (

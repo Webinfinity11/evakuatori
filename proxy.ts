@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isIP } from "node:net";
-import { isLocale, LOCALE_COOKIE, type Locale } from "./lib/i18n";
+import { isLocale, type Locale } from "./lib/i18n";
 import { isGeorgianIp } from "./lib/geo-ge";
 
 function countryLocale(req: NextRequest): Locale | null {
-  for (const header of ["cf-ipcountry", "x-vercel-ip-country"]) {
+  for (const header of ["x-vercel-ip-country", "cf-ipcountry"]) {
     const country = req.headers.get(header)?.trim().toUpperCase();
     if (country && /^[A-Z]{2}$/.test(country) && country !== "XX") {
       return country === "GE" ? "ka" : "en";
@@ -28,12 +28,16 @@ export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const segment = pathname.split("/")[1];
   const current = isLocale(segment) ? segment : null;
-  // Only the language switcher writes this cookie. Ignore the old automatic
-  // `locale` cookie so previously visited URLs cannot override geolocation.
-  const saved = req.cookies.get(LOCALE_COOKIE)?.value;
-  const locale = saved && isLocale(saved) ? saved : countryLocale(req) ?? current ?? "en";
+  // A manual choice belongs to this URL only. Persistent cookies must never
+  // override a new arrival from an ad, shared link, or a changed VPN country.
+  const explicit = req.nextUrl.searchParams.get("lang");
+  const locale = explicit && isLocale(explicit) ? explicit : countryLocale(req) ?? current ?? "en";
 
-  if (current === locale) return NextResponse.next();
+  if (current === locale) {
+    const response = NextResponse.next();
+    response.headers.set("Cache-Control", "private, no-store");
+    return response;
+  }
 
   const url = req.nextUrl.clone();
   const rest = current ? pathname.slice(current.length + 1) : pathname;

@@ -26,8 +26,15 @@ try {
     ["/en", { "x-forwarded-for": "2.57.60.1, 10.0.0.1" }, "/ka"],
     ["/ka", { "x-real-ip": "8.8.8.8", "accept-language": "ka" }, "/en"],
     ["/en", { "cf-ipcountry": "GE", cookie: "locale=en" }, "/ka"],
-    ["/en", { "cf-ipcountry": "GE", cookie: "locale-preference=en" }, null],
-    ["/ka", { "cf-ipcountry": "US", cookie: "locale-preference=ru" }, "/ru"],
+    ["/en", { "cf-ipcountry": "GE", cookie: "locale-preference=en" }, "/ka"],
+    ["/ka", { "cf-ipcountry": "US", cookie: "locale-preference=ru" }, "/en"],
+    ["/ka?gclid=test&gbraid=abc&wbraid=def&utm_source=google", { "x-vercel-ip-country": "US", cookie: "locale-preference=ka; locale=ka" }, "/en?gclid=test&gbraid=abc&wbraid=def&utm_source=google"],
+    ["/ka", { "x-vercel-ip-country": "US", "accept-language": "ka-GE,ka;q=0.9", cookie: "locale-preference=ka" }, "/en"],
+    ["/ka", { "x-vercel-ip-country": "US", "cf-ipcountry": "GE" }, "/en"],
+    ["/ka?lang=ka", { "x-vercel-ip-country": "US" }, null],
+    ["/ka?lang=en&gclid=test", { "x-vercel-ip-country": "GE" }, "/en?lang=en&gclid=test"],
+    ["/ka?lang=invalid", { "x-vercel-ip-country": "US" }, "/en?lang=invalid"],
+    ["/ru?lang=ru", { "x-vercel-ip-country": "US" }, null],
     ["/en", { "cf-ipcountry": "GE", cookie: "locale-preference=bad" }, "/ka"],
     ["/ka", { "cf-ipcountry": "GE" }, null],
     ["/en", { "cf-ipcountry": "US" }, null],
@@ -43,6 +50,7 @@ try {
     const response = proxy(new NextRequest(`https://example.com${url}`, { headers }));
     assert.equal(response.headers.get("location"), expected ? `https://example.com${expected}` : null, JSON.stringify({ url, headers }));
     assert.equal(response.headers.get("set-cookie"), null);
+    assert.equal(response.headers.get("cache-control"), "private, no-store");
     if (expected) {
       assert.equal(response.status, 307);
       assert.equal(response.headers.get("cache-control"), "private, no-store");
